@@ -20,6 +20,10 @@ object Versions {
     const val ROOM = "2.2.6"
     const val FRAGMENT = "1.2.5"
     const val TIMBER = "4.7.1"
+    const val RETROFIT = "2.7.2"
+    const val OK_HTTP = "4.0.0"
+    const val GLIDE = "4.12.0"
+    const val KOIN = "2.2.2"
 }
 
 object BuildPluginsVersion {
@@ -32,20 +36,36 @@ object BuildPluginsVersion {
 
 object SupportLibs {
     const val ANDROIDX_APPCOMPAT = "androidx.appcompat:appcompat:${Versions.APPCOMPAT}"
-    const val ANDROIDX_CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
+    const val ANDROIDX_CONSTRAINT_LAYOUT =
+        "androidx.constraintlayout:constraintlayout:${Versions.CONSTRAINT_LAYOUT}"
     const val ANDROIDX_CORE_KTX = "androidx.core:core-ktx:${Versions.CORE_KTX}"
     const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
-    const val ANDROIDX_NAVIGATION_FRAGMENT_KTX = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
-    const val ANDROIDX_NAVIGATION_UI_KTX = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+    const val ANDROIDX_NAVIGATION_FRAGMENT_KTX =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION}"
+    const val ANDROIDX_NAVIGATION_UI_KTX =
+        "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
     const val ANDROIDX_FRAGMENT_KTX = "androidx.fragment:fragment-ktx:${Versions.FRAGMENT}"
-    const val ANDROIDX_LIFECYCLE_EXTENSIONS = "androidx.lifecycle:lifecycle-extensions:${Versions.LIFECYCLE}"
-    const val ANDROIDX_LIFECYCLE_VIEWMODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
-    const val ANDROIDX_LIFECYCLE_LIVEDATA_KTX = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
+    const val ANDROIDX_LIFECYCLE_EXTENSIONS =
+        "androidx.lifecycle:lifecycle-extensions:${Versions.LIFECYCLE}"
+    const val ANDROIDX_LIFECYCLE_VIEWMODEL_KTX =
+        "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.LIFECYCLE}"
+    const val ANDROIDX_LIFECYCLE_LIVEDATA_KTX =
+        "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.LIFECYCLE}"
     const val ANDROIDX_ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
     const val ANDROIDX_ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
-    const val COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINE}"
-    const val COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINE}"
+    const val COROUTINES_CORE =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINE}"
+    const val COROUTINES_ANDROID =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINE}"
     const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
+    const val RETROFIT2 = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
+    const val RETROFIT2_GSON = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
+    const val OK_HTTP = "com.squareup.okhttp3:logging-interceptor:${Versions.OK_HTTP}"
+    const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
+    const val KOIN_ANDROID = "org.koin:koin-android:${Versions.KOIN}"
+    const val KOIN_VIEW_MODEL = "org.koin:koin-androidx-viewmodel:${Versions.KOIN}"
+    const val KOIN_SCOPE = "org.koin:koin-androidx-scope:${Versions.KOIN}"
 }
 
 object TestingLib {

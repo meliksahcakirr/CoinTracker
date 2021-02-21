@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blueGrayDarkVariant">#466288</color>
-    <color name="blueGrayDark">#354a67</color>
-    <color name="blueGrayLightVariant">#718094</color>
-    <color name="blueGrayLight">#5d6e85</color>
-    <color name="orangeLight">#fdb43a</color>
-    <color name="orangeDark">#f57a21</color>
-    <color name="redLight">#cf6679</color>
+    <color name="blueGrayDarkVariant">#1f2c3d</color>
+    <color name="blueGrayDark">#1a2533</color>
+    <color name="blueGrayDarker">#151d29</color>
+    <!--<color name="blueGrayLightVariant">#718094</color>-->
+    <!--<color name="blueGrayLight">#5d6e85</color>-->
+    <color name="orange">#fdb43a</color>
+    <color name="orangeVariant">#f57a21</color>
+    <!--<color name="redLight">#cf6679</color>-->
     <color name="redDark">#C62828</color>
-    <!--<color name="grayLight">#808080</color>-->
-    <color name="grayDark">#202020</color>
-    <color name="black">#FF000000</color>
+    <color name="grayLight">#C0C0C0</color>
+    <color name="grayTransparent">#40C0C0C0</color>
+    <!--<color name="grayDark">#202020</color>-->
+    <!--<color name="black">#FF000000</color>-->
     <color name="white">#FFFFFFFF</color>
 </resources>

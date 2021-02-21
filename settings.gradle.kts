@@ -20,7 +20,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = ("androidtemplate")
+rootProject.name = ("cointracker")
 
 include(
     "app",

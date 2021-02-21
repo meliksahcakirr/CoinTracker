@@ -4,6 +4,7 @@ plugins {
     id("kotlin-android-extensions")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-android")
 }
 
 android {
@@ -36,6 +37,14 @@ android {
         isWarningsAsErrors = true
         isAbortOnError = true
     }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -57,6 +66,17 @@ dependencies {
     implementation(SupportLibs.COROUTINES_CORE)
     implementation(SupportLibs.COROUTINES_ANDROID)
     implementation(SupportLibs.TIMBER)
+    implementation(SupportLibs.RETROFIT2)
+    implementation(SupportLibs.RETROFIT2_GSON)
+    implementation(SupportLibs.OK_HTTP)
+    implementation(SupportLibs.GLIDE)
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
+    kapt(SupportLibs.GLIDE_COMPILER)
+    implementation(SupportLibs.KOIN_ANDROID)
+    implementation(SupportLibs.KOIN_VIEW_MODEL)
+    implementation(SupportLibs.KOIN_SCOPE)
 
     testImplementation(TestingLib.JUNIT)
 

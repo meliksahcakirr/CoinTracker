@@ -1,4 +1,4 @@
-package com.meliksahcakir.androidtemplate
+package com.meliksahcakir.cointracker
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
