@@ -5,23 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.meliksahcakir.cointracker.R
+import com.meliksahcakir.cointracker.databinding.DetailsFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsFragment : Fragment() {
 
-    private lateinit var viewModel: DetailsViewModel
+    private var _binding: DetailsFragmentBinding? = null
+    private val binding: DetailsFragmentBinding get() = _binding!!
+
+    private val viewModel: DetailsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.details_fragment, container, false)
+        _binding = DetailsFragmentBinding.inflate(inflater)
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

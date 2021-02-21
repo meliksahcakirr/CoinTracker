@@ -23,7 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backgroundTint="?attr/colorSurface"
-        app:elevation="10dp"
         app:itemIconTint="@color/bottom_navigation_tint_selector"
         app:itemTextColor="@color/bottom_navigation_tint_selector"
         app:layout_constraintBottom_toBottomOf="parent"
