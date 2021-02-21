@@ -10,6 +10,7 @@ import com.meliksahcakir.cointracker.data.CoinRepository
 import com.meliksahcakir.cointracker.details.DetailsViewModel
 import com.meliksahcakir.cointracker.favorite.FavoriteViewModel
 import com.meliksahcakir.cointracker.main.MainViewModel
+import com.meliksahcakir.cointracker.splash.SplashViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -17,6 +18,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+val splashViewModelModule = module {
+    viewModel {
+        SplashViewModel(get())
+    }
+}
 
 val mainViewModelModule = module {
     viewModel {
@@ -92,6 +99,7 @@ val databaseModule = module {
 }
 
 val modules = listOf(
+    splashViewModelModule,
     mainViewModelModule,
     detailsViewModelModule,
     favoriteViewModelModule,

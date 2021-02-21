@@ -74,6 +74,8 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.3.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0")
+    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
     kapt(SupportLibs.GLIDE_COMPILER)
     implementation(SupportLibs.KOIN_ANDROID)
     implementation(SupportLibs.KOIN_VIEW_MODEL)

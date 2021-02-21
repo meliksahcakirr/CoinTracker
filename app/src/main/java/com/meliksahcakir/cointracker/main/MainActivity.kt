@@ -1,4 +1,4 @@
-package com.meliksahcakir.cointracker
+package com.meliksahcakir.cointracker.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {

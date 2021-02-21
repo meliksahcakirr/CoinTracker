@@ -18,7 +18,7 @@ interface ApiService {
     @GET("coins/list")
     suspend fun getCoinInfoList(): List<CoinInfo>
 
-    @GET("coins/market")
+    @GET("coins/markets")
     suspend fun getCoinsMarketData(
         @Query("vs_currency") currency: String = DEFAULT_CURRENCY,
         @Query("ids") ids: String = "",
