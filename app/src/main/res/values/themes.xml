@@ -1,0 +1,36 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyApp" parent="Base.Theme.MyApp" />
+
+    <style name="Base.Theme.MyApp" parent="Base.Theme.App">
+        <item name="colorPrimary">@color/blueGrayDark</item>
+        <item name="colorPrimaryVariant">@color/blueGrayDarkVariant</item>
+        <item name="colorSecondary">@color/orangeLight</item>
+        <item name="colorSecondaryVariant">@color/orangeDark</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/redDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnBackground">@color/grayDark</item>
+        <item name="colorOnSurface">@color/grayDark</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
+        </item>
+    </style>
+
+    <style name="Base.Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:navigationBarColor">?android:colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="fontFamily">@font/montserrat</item>
+    </style>
+
+    <!--<style name="MaterialCardViewStyle" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">8dp</item>
+        <item name="cardElevation">8dp</item>
+    </style>-->
+
+</resources>
