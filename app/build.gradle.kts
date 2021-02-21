@@ -61,6 +61,7 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_LIFECYCLE_EXTENSIONS)
     implementation(SupportLibs.ANDROIDX_LIFECYCLE_VIEWMODEL_KTX)
     implementation(SupportLibs.ANDROIDX_LIFECYCLE_LIVEDATA_KTX)
+    implementation(SupportLibs.ANDROIDX_ROOM_KTX)
     implementation(SupportLibs.ANDROIDX_ROOM_RUNTIME)
     implementation(SupportLibs.ANDROIDX_ROOM_COMPILER)
     implementation(SupportLibs.COROUTINES_CORE)
