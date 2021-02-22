@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/base_grid_size">
+
+        <ImageView
+            android:id="@+id/coinImageView"
+            android:layout_width="@dimen/small_image_view_size"
+            android:layout_height="@dimen/small_image_view_size"
+            android:contentDescription="@string/coin_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/coinTextView"
+            style="@style/CoinTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_grid_size"
+            app:layout_constraintBottom_toTopOf="@id/volumeTextView"
+            app:layout_constraintStart_toEndOf="@id/coinImageView"
+            app:layout_constraintTop_toTopOf="@id/coinImageView"
+            tools:text="BTC" />
+
+        <TextView
+            android:id="@+id/currencyTextView"
+            style="@style/CurrencyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/half_grid_size"
+            app:layout_constraintBottom_toBottomOf="@id/coinTextView"
+            app:layout_constraintStart_toEndOf="@id/coinTextView"
+            android:text="@string/vs_usd" />
+
+        <TextView
+            android:id="@+id/volumeTextView"
+            style="@style/VolumeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_grid_size"
+            app:layout_constraintBottom_toBottomOf="@id/coinImageView"
+            app:layout_constraintStart_toStartOf="@id/coinTextView"
+            app:layout_constraintTop_toBottomOf="@id/coinTextView"
+            tools:text="Vol 3,461,072,646" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/percentageButton"
+            style="@style/CustomOutlinedButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="+999.995" />
+
+        <TextView
+            android:id="@+id/lastPriceTextView"
+            style="@style/CoinTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/midEndGuideline"
+            app:layout_constraintStart_toStartOf="@id/midStartGuideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$0.00099999" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/midStartGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="160dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/midEndGuideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="110dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

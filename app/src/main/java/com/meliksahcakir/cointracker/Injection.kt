@@ -11,8 +11,10 @@ import com.meliksahcakir.cointracker.details.DetailsViewModel
 import com.meliksahcakir.cointracker.favorite.FavoriteViewModel
 import com.meliksahcakir.cointracker.main.MainViewModel
 import com.meliksahcakir.cointracker.splash.SplashViewModel
+import com.meliksahcakir.cointracker.utils.NetworkConnectionInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -27,7 +29,7 @@ val splashViewModelModule = module {
 
 val mainViewModelModule = module {
     viewModel {
-        MainViewModel(get())
+        MainViewModel(get(), androidApplication())
     }
 }
 
@@ -67,10 +69,14 @@ val apiModule = module {
 
 val retrofitModule = module {
 
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(context: Context): OkHttpClient {
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BASIC
-        return OkHttpClient.Builder().addInterceptor(logger).build()
+        val networkInterceptor = NetworkConnectionInterceptor(context)
+        return OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .addInterceptor(networkInterceptor)
+            .build()
     }
 
     fun provideRetrofit(client: OkHttpClient): Retrofit {
@@ -81,7 +87,7 @@ val retrofitModule = module {
             .build()
     }
 
-    single { provideHttpClient() }
+    single { provideHttpClient(androidContext()) }
     single { provideRetrofit(get()) }
 }
 

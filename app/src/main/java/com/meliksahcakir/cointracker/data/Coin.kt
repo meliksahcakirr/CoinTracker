@@ -11,10 +11,12 @@ data class CoinRemote(
     val image: String,
     @SerializedName("current_price")
     val currentPrice: Double,
+    @SerializedName("market_cap")
+    val marketCap: Long,
     @SerializedName("total_volume")
     val totalVolume: Long,
     @SerializedName("price_change_percentage_24h")
-    val priceChangePercentage24h: Double,
+    val priceChangePercentage24h: Float,
 ) {
 
     fun mapToLocalModel(): Coin {
@@ -24,6 +26,7 @@ data class CoinRemote(
             name,
             image,
             currentPrice,
+            marketCap,
             totalVolume,
             priceChangePercentage24h,
             false
@@ -39,7 +42,8 @@ data class Coin(
     val name: String,
     val image: String,
     val currentPrice: Double,
+    val marketCap: Long,
     val totalVolume: Long,
-    val priceChangePercentage24h: Double,
+    val priceChangePercentage24h: Float,
     val favorite: Boolean = false
 )

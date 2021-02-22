@@ -1,8 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main.MainFragment">
+    android:layout_height="match_parent">
 
-</FrameLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/searchCardView"
+        style="@style/MaterialCardViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/sortImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:focusable="true"
+                android:hint="@string/search_coins"
+                android:imeOptions="actionSearch"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="15dp"
+                android:paddingEnd="30dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="5dp"
+                android:contentDescription="@string/search"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/colorSecondary" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCardView" />
+
+    <ImageView
+        android:id="@+id/sortImageView"
+        android:layout_width="@dimen/normal_image_view_size"
+        android:layout_height="@dimen/normal_image_view_size"
+        android:layout_marginHorizontal="@dimen/base_grid_size"
+        android:background="?selectableItemBackground"
+        android:contentDescription="@string/sort"
+        android:src="@drawable/ic_sort"
+        app:layout_constraintBottom_toBottomOf="@id/searchCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/searchCardView"
+        app:layout_constraintTop_toTopOf="@id/searchCardView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/base_grid_size"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCardView"
+        tools:itemCount="5"
+        tools:listitem="@layout/coin_item" />
+
+    <ImageView
+        android:id="@+id/emptyImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:alpha="0.5"
+        android:contentDescription="@string/no_coins_available"
+        android:src="@drawable/ic_monetization"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emptyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.5"
+        android:text="@string/no_coins_available"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emptyImageView" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/emptyGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="emptyImageView,emptyTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

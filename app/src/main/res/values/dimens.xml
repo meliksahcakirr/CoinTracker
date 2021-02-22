@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--<dimen name="base_grid_size">8dp</dimen>-->
-    <!--<dimen name="doub_grid_size">16dp</dimen>-->
+    <dimen name="quarter_grid_size">2dp</dimen>
+    <dimen name="half_grid_size">4dp</dimen>
+    <dimen name="base_grid_size">8dp</dimen>
+    <dimen name="double_grid_size">16dp</dimen>
+    <dimen name="normal_image_view_size">40dp</dimen>
+    <dimen name="small_image_view_size">30dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_radius_normal">8dp</dimen>
+    <dimen name="card_radius_none">0dp</dimen>
 </resources>

@@ -3,4 +3,12 @@
     <string name="market">Market</string>
     <string name="favorites">Favorites</string>
     <string name="cointracker_logo">CoinTracker Logo</string>
+    <string name="search">Search</string>
+    <string name="search_coins">Search coins</string>
+    <string name="sort">Sort</string>
+    <string name="coin_logo">coin_logo</string>
+    <string name="error_occurred">Error Occurred</string>
+    <string name="no_internet">Internet connection is not available. </string>
+    <string name="no_coins_available">There are no coins available.</string>
+    <string name="vs_usd">/ USD</string>
 </resources>
