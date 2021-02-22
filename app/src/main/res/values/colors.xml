@@ -7,12 +7,11 @@
     <!--<color name="blueGrayLight">#5d6e85</color>-->
     <color name="orange">#fdb43a</color>
     <color name="orangeVariant">#f57a21</color>
-    <!--<color name="redLight">#cf6679</color>-->
-    <color name="redDark">#C62828</color>
-    <color name="grayLight">#C0C0C0</color>
+    <color name="redDark">#ff5147</color>
+    <color name="grayLight">#a0a0a0</color>
     <!--<color name="grayTransparent">#40C0C0C0</color>-->
     <!--<color name="grayDark">#202020</color>-->
     <!--<color name="black">#FF000000</color>-->
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="green">#1ed760</color>
 </resources>

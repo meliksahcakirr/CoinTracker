@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    style="@style/CoinCardViewStyle">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/half_grid_size"
+            android:text="@string/vs_usd"
             app:layout_constraintBottom_toBottomOf="@id/coinTextView"
-            app:layout_constraintStart_toEndOf="@id/coinTextView"
-            android:text="@string/vs_usd" />
+            app:layout_constraintStart_toEndOf="@id/coinTextView" />
 
         <TextView
             android:id="@+id/volumeTextView"
@@ -52,16 +53,14 @@
             app:layout_constraintTop_toBottomOf="@id/coinTextView"
             tools:text="Vol 3,461,072,646" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/percentageButton"
-            style="@style/CustomOutlinedButton"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:enabled="false"
+        <TextView
+            android:id="@+id/percentageTextView"
+            style="@style/PercentageTextView"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="+999.995" />
+            tools:background="@drawable/neutral_background"
+            tools:text="-999.995%" />
 
         <TextView
             android:id="@+id/lastPriceTextView"
