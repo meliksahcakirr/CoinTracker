@@ -79,17 +79,62 @@
         app:layout_constraintStart_toEndOf="@id/searchCardView"
         app:layout_constraintTop_toTopOf="@id/searchCardView" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:prompt="@string/sort_by"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/nameVolTextView"
+        style="@style/SmallInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base_grid_size"
+        android:layout_marginTop="@dimen/double_grid_size"
+        android:text="@string/name_vol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCardView" />
+
+    <TextView
+        android:id="@+id/lastPriceTextView"
+        style="@style/SmallInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/mid_guide_start"
+        android:layout_marginTop="@dimen/double_grid_size"
+        android:layout_marginEnd="@dimen/mid_guide_end"
+        android:text="@string/last_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCardView" />
+
+    <TextView
+        android:id="@+id/priceChangeTextView"
+        style="@style/SmallInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_grid_size"
+        android:layout_marginEnd="@dimen/base_grid_size"
+        android:text="@string/percentage_change_24h"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCardView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/base_grid_size"
+        android:layout_marginTop="@dimen/half_grid_size"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchCardView"
-        tools:itemCount="5"
+        app:layout_constraintTop_toBottomOf="@id/nameVolTextView"
+        tools:itemCount="15"
         tools:listitem="@layout/coin_item" />
 
     <ImageView

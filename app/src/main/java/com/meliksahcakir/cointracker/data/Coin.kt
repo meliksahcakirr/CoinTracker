@@ -45,3 +45,16 @@ data class Coin(
     val totalVolume: Double,
     val priceChangePercentage24h: Double,
 )
+
+enum class CoinOrder {
+    MARKET_CAP_DESC,
+    MARKET_CAP_ASC,
+    VOLUME_DESC,
+    VOLUME_ASC,
+    NAME_DESC,
+    NAME_ASC,
+    LAST_PRICE_DESC,
+    LAST_PRICE_ASC,
+    PERCENT_CHANGE_DESC,
+    PERCENT_CHANGE_ASC,
+}

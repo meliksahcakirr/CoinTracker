@@ -2,9 +2,9 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CoinCardViewStyle"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/CoinCardViewStyle">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -79,14 +79,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="160dp" />
+            app:layout_constraintGuide_begin="@dimen/mid_guide_start" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/midEndGuideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="110dp" />
+            app:layout_constraintGuide_end="@dimen/mid_guide_end" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

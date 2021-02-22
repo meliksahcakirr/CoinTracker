@@ -11,4 +11,20 @@
     <string name="no_internet">Internet connection is not available. </string>
     <string name="no_coins_available">There are no coins available.</string>
     <string name="vs_usd">/ USD</string>
+    <string name="name_vol">Name / Vol</string>
+    <string name="last_price">Last Price</string>
+    <string name="percentage_change_24h">24h Chg %</string>
+    <string name="sort_by">Sort By</string>
+    <string-array name="sort_methods">
+        <item>Market Cap Descending</item>
+        <item>Market Cap Ascending</item>
+        <item>Volume Descending</item>
+        <item>Volume Ascending</item>
+        <item>Name Descending</item>
+        <item>Name Ascending</item>
+        <item>Last Price Descending</item>
+        <item>Last Price Ascending</item>
+        <item>24h Change Descending</item>
+        <item>24h Change Ascending</item>
+    </string-array>
 </resources>

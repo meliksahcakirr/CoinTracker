@@ -22,12 +22,14 @@ const val FETCH_INTERVAL = 1500L
 class MainViewModel(private val repository: CoinRepository, private val app: Application) :
     AndroidViewModel(app) {
 
-    private var order = CoinOrder.MARKET_CAP_DESC
+    private var _order = MutableLiveData<CoinOrder>(CoinOrder.MARKET_CAP_DESC)
 
-    private val _searchText = MutableLiveData<String>("")
+    private var searchText = ""
 
-    val coins: LiveData<List<Coin>> = repository.observeCoins().switchMap {
-        sortCoins(it, order)
+    val coins: LiveData<List<Coin>> = _order.switchMap { order ->
+        repository.observeCoins().switchMap {
+            sortCoins(it, order)
+        }
     }
 
     private val _busy = MutableLiveData<Boolean>(false)
@@ -77,11 +79,21 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
             CoinOrder.MARKET_CAP_ASC -> list.sortedBy { it.marketCap }
             CoinOrder.VOLUME_DESC -> list.sortedByDescending { it.totalVolume }
             CoinOrder.VOLUME_ASC -> list.sortedBy { it.totalVolume }
-            CoinOrder.ID_ASC -> list.sortedBy { it.id }
-            CoinOrder.ID_DESC -> list.sortedByDescending { it.id }
+            CoinOrder.NAME_DESC -> list.sortedByDescending { it.name }
+            CoinOrder.NAME_ASC -> list.sortedBy { it.name }
+            CoinOrder.LAST_PRICE_DESC -> list.sortedByDescending { it.currentPrice }
+            CoinOrder.LAST_PRICE_ASC -> list.sortedBy { it.currentPrice }
+            CoinOrder.PERCENT_CHANGE_DESC -> list.sortedByDescending { it.priceChangePercentage24h }
+            CoinOrder.PERCENT_CHANGE_ASC -> list.sortedBy { it.priceChangePercentage24h }
         }
         result.value = sortedList
         return result
+    }
+
+    fun changeOrder(index: Int) {
+        if (index >= 0 && index < CoinOrder.values().size) {
+            _order.value = CoinOrder.values()[index]
+        }
     }
 
     override fun onCleared() {

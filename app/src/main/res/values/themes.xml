@@ -82,4 +82,10 @@
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle2
         </item>
     </style>
+
+    <style name="SmallInfoTextView" parent="">
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Caption
+        </item>
+        <item name="android:textColor">?colorSecondary</item>
+    </style>
 </resources>
