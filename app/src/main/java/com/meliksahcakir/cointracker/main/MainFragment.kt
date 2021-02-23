@@ -147,10 +147,13 @@ class MainFragment : Fragment(), CoinListener {
                 }
             }
         )
-        viewModel.navigateToDetailsPage.observe(viewLifecycleOwner, EventObserver {
-            val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it)
-            findNavController().navigate(action)
-        })
+        viewModel.navigateToDetailsPage.observe(
+            viewLifecycleOwner,
+            EventObserver {
+                val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it)
+                findNavController().navigate(action)
+            }
+        )
     }
 
     override fun onDestroyView() {

@@ -18,8 +18,8 @@ data class CoinDetailsRemote(
             id,
             symbol,
             name,
-            hashingAlgorithm ?: "",
-            description?.en ?: "",
+            hashingAlgorithm ?: "--",
+            description?.en ?: "--",
             image.thumb,
             image.small,
             image.large

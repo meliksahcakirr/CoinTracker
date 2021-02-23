@@ -1,7 +1,7 @@
 package com.meliksahcakir.cointracker.details
 
 import android.os.Bundle
-import android.text.util.Linkify
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,25 +60,34 @@ class DetailsFragment : Fragment() {
             }
         )
 
-        viewModel.coin.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                bindCoin(it)
+        viewModel.coin.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it != null) {
+                    bindCoin(it)
+                }
             }
-        })
+        )
 
-        viewModel.details.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                bindCoinDetails(it)
+        viewModel.details.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it != null) {
+                    bindCoinDetails(it)
+                }
             }
-        })
+        )
 
-        viewModel.favorite.observe(viewLifecycleOwner, Observer {
-            if (it == true) {
-                binding.favoriteImageView.setImageResource(R.drawable.ic_favorite_on)
-            } else {
-                binding.favoriteImageView.setImageResource(R.drawable.ic_favorite_off)
+        viewModel.favorite.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it == true) {
+                    binding.favoriteImageView.setImageResource(R.drawable.ic_favorite_on)
+                } else {
+                    binding.favoriteImageView.setImageResource(R.drawable.ic_favorite_off)
+                }
             }
-        })
+        )
 
         binding.favoriteImageView.setOnClickListener {
             viewModel.onFavoriteButtonClicked()
@@ -116,12 +125,12 @@ class DetailsFragment : Fragment() {
 
     private fun bindCoinDetails(details: CoinDetails) {
         with(binding.infoSheet) {
-            coinImageView.setImageUrl(details.large)
+            infoCoinImageView.setImageUrl(details.large)
             val coinText = "${details.name} (${details.symbol.toUpperCase(Locale.getDefault())})"
-            coinTextView.text = coinText
-            hashingTextView.text = details.hashingAlgorithm
-            descriptionTextView.text = details.description.toSpanned()
-            Linkify.addLinks(descriptionTextView, Linkify.WEB_URLS)
+            infoCoinTextView.text = coinText
+            infoHashingTextView.text = details.hashingAlgorithm
+            infoDescriptionTextView.text = details.description.toSpanned()
+            infoDescriptionTextView.movementMethod = LinkMovementMethod.getInstance()
         }
     }
 
