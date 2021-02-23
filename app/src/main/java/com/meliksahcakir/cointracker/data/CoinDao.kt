@@ -11,16 +11,19 @@ import androidx.room.Update
 interface CoinDao {
 
     @Query("SELECT * FROM coinInfo")
-    fun getCoinInfoList(): List<CoinInfo>
+    suspend fun getCoinInfoList(): List<CoinInfo>
 
     @Insert
     suspend fun insertAllCoinInfo(vararg coinInfo: CoinInfo)
 
     @Query("DELETE FROM coinInfo")
-    fun deleteAllCoinInfo()
+    suspend fun deleteAllCoinInfo()
 
-    @Query("SELECT * FROM coinInfo WHERE name LIKE :q OR symbol LIKE :q ORDER BY name ASC")
-    fun searchForCoinInfo(q: String): List<CoinInfo>
+    @Query(
+        "SELECT * FROM coinInfo WHERE name LIKE '%' || :q || '%' OR " +
+            "symbol LIKE '%' || :q || '%' ORDER BY name ASC"
+    )
+    suspend fun searchForCoinInfo(q: String): List<CoinInfo>
 
     @Query("SELECT * FROM coins")
     fun observeCoins(): LiveData<List<Coin>>

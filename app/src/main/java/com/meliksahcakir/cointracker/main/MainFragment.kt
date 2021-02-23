@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.meliksahcakir.androidutils.EventObserver
+import com.meliksahcakir.androidutils.afterTextChanged
+import com.meliksahcakir.androidutils.hideKeyboard
 import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.data.Coin
 import com.meliksahcakir.cointracker.databinding.MainFragmentBinding
@@ -26,6 +31,8 @@ class MainFragment : Fragment(), CoinListener {
 
     private val viewModel: MainViewModel by sharedViewModel()
     private val adapter = CoinAdapter(this)
+
+    private var searchWindow: ListPopupWindow? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +76,16 @@ class MainFragment : Fragment(), CoinListener {
                 }
             }
         )
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            if (searchWindow?.isShowing == true) {
+                searchWindow?.dismiss()
+            } else {
+                isEnabled = false
+                activity?.onBackPressed()
+            }
+        }
         setupSortMenu()
+        setupSearch()
     }
 
     private fun setupSortMenu() {
@@ -87,6 +103,45 @@ class MainFragment : Fragment(), CoinListener {
         binding.sortImageView.setOnClickListener {
             binding.spinner.performClick()
         }
+    }
+
+    private fun setupSearch() {
+        searchWindow = ListPopupWindow(requireActivity(), null, R.attr.listPopupWindowStyle)
+        searchWindow?.anchorView = binding.searchCardView
+        binding.searchEditText.afterTextChanged {
+            viewModel.search(it)
+        }
+        binding.searchEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.search(binding.searchEditText.text.toString())
+                binding.root.hideKeyboard()
+            }
+            true
+        }
+        viewModel.searchResults.observe(
+            viewLifecycleOwner,
+            Observer { coinList ->
+                val list = coinList ?: emptyList()
+                val adapter = ArrayAdapter(requireContext(), R.layout.search_item, list)
+                searchWindow?.setAdapter(adapter)
+                if (coinList.isNullOrEmpty()) {
+                    searchWindow?.let {
+                        if (it.isShowing) {
+                            it.dismiss()
+                        }
+                    }
+                } else {
+                    searchWindow?.setOnItemClickListener { adapterView, _, pos, _ ->
+                        val coinInfo = adapterView.adapter.getItem(pos)
+                        searchWindow?.dismiss()
+                        // NAVIGATE
+                    }
+                    binding.root.post {
+                        searchWindow?.show()
+                    }
+                }
+            }
+        )
     }
 
     override fun onDestroyView() {

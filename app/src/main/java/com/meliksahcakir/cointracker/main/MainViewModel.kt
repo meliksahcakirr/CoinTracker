@@ -10,6 +10,7 @@ import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
 import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.data.Coin
+import com.meliksahcakir.cointracker.data.CoinInfo
 import com.meliksahcakir.cointracker.data.CoinOrder
 import com.meliksahcakir.cointracker.data.CoinRepository
 import com.meliksahcakir.cointracker.utils.NoConnectivityException
@@ -18,6 +19,7 @@ import java.util.Timer
 import java.util.TimerTask
 
 const val FETCH_INTERVAL = 1500L
+const val SEARCH_LENGTH_THRESHOLD = 3
 
 class MainViewModel(private val repository: CoinRepository, private val app: Application) :
     AndroidViewModel(app) {
@@ -25,6 +27,9 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
     private var _order = MutableLiveData<CoinOrder>(CoinOrder.MARKET_CAP_DESC)
 
     private var searchText = ""
+
+    private val _searchResults = MutableLiveData<List<CoinInfo>?>()
+    val searchResults: LiveData<List<CoinInfo>?> = _searchResults
 
     val coins: LiveData<List<Coin>> = _order.switchMap { order ->
         repository.observeCoins().switchMap {
@@ -93,6 +98,22 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
     fun changeOrder(index: Int) {
         if (index >= 0 && index < CoinOrder.values().size) {
             _order.value = CoinOrder.values()[index]
+        }
+    }
+
+    fun search(query: String) {
+        searchText = query
+        if (query.length < SEARCH_LENGTH_THRESHOLD) {
+            _searchResults.value = null
+        } else {
+            viewModelScope.launch {
+                val result = repository.searchCoins(query)
+                if (result is Result.Success) {
+                    _searchResults.value = result.data
+                } else {
+                    _searchResults.value = null
+                }
+            }
         }
     }
 

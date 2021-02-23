@@ -15,6 +15,7 @@
         <item name="colorOnBackground">@color/white</item>
         <item name="colorOnSurface">@color/white</item>
         <item name="colorOnError">@color/white</item>
+        <item name="popupMenuBackground">@drawable/popup_background</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
         </item>
     </style>

@@ -1,8 +1,6 @@
 package com.meliksahcakir.cointracker.data
 
 import com.meliksahcakir.androidutils.Result
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class CoinRepository(
     private val coinDao: CoinDao,
@@ -13,7 +11,7 @@ class CoinRepository(
     private var fetchingCoins = false
     private var fetchingCoinInfoList = false
 
-    suspend fun fetchCoinInfoList() = withContext(Dispatchers.IO) {
+    suspend fun fetchCoinInfoList() {
         if (fetchingCoinInfoList) {
             try {
                 val list = apiService.getCoinInfoList()
