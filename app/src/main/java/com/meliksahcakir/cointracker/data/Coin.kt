@@ -15,6 +15,10 @@ data class CoinRemote(
     val marketCap: Long,
     @SerializedName("total_volume")
     val totalVolume: Double,
+    @SerializedName("high_24h")
+    val high24h: Double,
+    @SerializedName("low_24h")
+    val low24h: Double,
     @SerializedName("price_change_percentage_24h")
     val priceChangePercentage24h: Double,
 ) {
@@ -28,6 +32,8 @@ data class CoinRemote(
             currentPrice,
             marketCap,
             totalVolume,
+            high24h,
+            low24h,
             priceChangePercentage24h,
         )
     }
@@ -43,6 +49,8 @@ data class Coin(
     val currentPrice: Double,
     val marketCap: Long,
     val totalVolume: Double,
+    val high24h: Double,
+    val low24h: Double,
     val priceChangePercentage24h: Double,
 )
 

@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.meliksahcakir.cointracker.R
@@ -31,4 +34,13 @@ fun ImageView.setImageUrl(url: String) {
         .centerCrop()
         .placeholder(R.drawable.ic_monetization)
         .into(this)
+}
+
+fun String.toSpanned(): Spanned {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        @Suppress("DEPRECATION")
+        return Html.fromHtml(this)
+    }
 }

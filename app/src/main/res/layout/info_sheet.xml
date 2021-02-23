@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="100dp"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    android:id="@+id/bottomSheet">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/base_grid_size">
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/TitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:text="@string/details"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/coinImageView"
+            android:layout_width="@dimen/normal_image_view_size"
+            android:layout_height="@dimen/normal_image_view_size"
+            android:contentDescription="@string/coin_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTextView"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/coinTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base_grid_size"
+            app:layout_constraintBottom_toBottomOf="@id/coinImageView"
+            app:layout_constraintStart_toEndOf="@id/coinImageView"
+            app:layout_constraintTop_toTopOf="@id/coinImageView"
+            tools:text="Bitcoin (BTC)" />
+
+        <TextView
+            android:id="@+id/hashingTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_grid_size"
+            android:text="@string/hashing_algorithm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/coinImageView" />
+
+        <TextView
+            android:id="@+id/hashingTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/hashingTitleTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/hashingTitleTextView"
+            tools:text="SHA 256" />
+
+        <TextView
+            android:id="@+id/descriptionTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_grid_size"
+            android:text="@string/description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hashingTitleTextView" />
+
+        <TextView
+            android:id="@+id/descriptionTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_grid_size"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/descriptionTitleTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

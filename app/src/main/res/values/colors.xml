@@ -4,7 +4,7 @@
     <color name="blueGrayDark">#1a2533</color>
     <!--<color name="blueGrayDarker">#151d29</color>-->
     <!--<color name="blueGrayLightVariant">#718094</color>-->
-    <!--<color name="blueGrayLight">#5d6e85</color>-->
+    <color name="blueGrayLight">#344a66</color>
     <color name="orange">#fdb43a</color>
     <color name="orangeVariant">#f57a21</color>
     <color name="redDark">#ff5147</color>

@@ -1,8 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".details.DetailsFragment">
+    android:layout_height="match_parent">
 
-</FrameLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:prompt="@string/update_interval"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/double_grid_size">
+
+        <ImageView
+            android:id="@+id/settingsImageView"
+            android:layout_width="@dimen/small_image_view_size"
+            android:layout_height="@dimen/small_image_view_size"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/coinTextView"
+            style="@style/TitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_grid_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="BTC / USD" />
+
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="@dimen/small_image_view_size"
+            android:layout_height="@dimen/small_image_view_size"
+            android:background="?selectableItemBackground"
+            android:contentDescription="@string/favorites"
+            android:src="@drawable/ic_favorite_off"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/orange" />
+
+        <TextView
+            android:id="@+id/lastPriceTextView"
+            style="@style/LargeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/half_grid_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/coinTextView"
+            tools:text="$9.99999999" />
+
+        <TextView
+            android:id="@+id/percentageTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/percentage_change_24h"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lastPriceTextView" />
+
+        <TextView
+            android:id="@+id/percentageTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percentageTitleTextView"
+            tools:text="999.99%" />
+
+        <TextView
+            android:id="@+id/volumeTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="start"
+
+            android:text="@string/volume"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/percentageTextView" />
+
+        <TextView
+            android:id="@+id/volumeTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/volumeTitleTextView"
+            tools:text="999,999,999,999" />
+
+        <TextView
+            android:id="@+id/highTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/high_24h"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lastPriceTextView" />
+
+        <TextView
+            android:id="@+id/highTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/highTitleTextView"
+            tools:text="$9.99999999" />
+
+        <TextView
+            android:id="@+id/lowTitleTextView"
+            style="@style/SmallInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="end"
+            android:text="@string/low_24h"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/highTextView" />
+
+        <TextView
+            android:id="@+id/lowTextView"
+            style="@style/SmallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base_grid_size"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lowTitleTextView"
+            tools:text="$9.99999999" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/infoSheet"
+        layout="@layout/info_sheet" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

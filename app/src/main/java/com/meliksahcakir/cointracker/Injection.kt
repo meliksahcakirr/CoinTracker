@@ -35,7 +35,7 @@ val mainViewModelModule = module {
 
 val detailsViewModelModule = module {
     viewModel {
-        DetailsViewModel(get())
+        DetailsViewModel(get(), androidApplication())
     }
 }
 

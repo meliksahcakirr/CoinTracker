@@ -9,8 +9,8 @@ data class CoinDetailsRemote(
     val symbol: String,
     val name: String,
     @SerializedName("hashing_algorithm")
-    val hashingAlgorithm: String,
-    val description: CoinDetailsDescriptionRemote,
+    val hashingAlgorithm: String? = null,
+    val description: CoinDetailsDescriptionRemote? = null,
     val image: CoinDetailsImagesRemote
 ) {
     fun mapToLocalModel(): CoinDetails {
@@ -18,8 +18,8 @@ data class CoinDetailsRemote(
             id,
             symbol,
             name,
-            hashingAlgorithm,
-            description.en,
+            hashingAlgorithm ?: "",
+            description?.en ?: "",
             image.thumb,
             image.small,
             image.large
@@ -43,7 +43,7 @@ data class CoinDetails(
     val id: String,
     val symbol: String,
     val name: String,
-    val hashingAlgorithm: String,
+    val hashingAlgorithm: String = "",
     val description: String = "",
     val thumb: String,
     val small: String,

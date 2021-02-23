@@ -15,10 +15,11 @@ import com.meliksahcakir.cointracker.data.CoinOrder
 import com.meliksahcakir.cointracker.data.CoinRepository
 import com.meliksahcakir.cointracker.utils.NoConnectivityException
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.Timer
 import java.util.TimerTask
 
-const val FETCH_INTERVAL = 1500L
+const val FETCH_INTERVAL = 1000L
 const val SEARCH_LENGTH_THRESHOLD = 3
 
 class MainViewModel(private val repository: CoinRepository, private val app: Application) :
@@ -43,19 +44,14 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
     private val _warningEvent = MutableLiveData<Event<String>>()
     val warningEvent: LiveData<Event<String>> = _warningEvent
 
-    private val timer = Timer()
+    private val _navigateToDetailsPage = MutableLiveData<Event<String>>()
+    val navigateToDetailsPage: LiveData<Event<String>> = _navigateToDetailsPage
+
+    private var timer: Timer? = null
 
     init {
+        Timber.d("MainViewModel init")
         fetchCoins(true)
-        timer.scheduleAtFixedRate(
-            object : TimerTask() {
-                override fun run() {
-                    fetchCoins()
-                }
-            },
-            FETCH_INTERVAL,
-            FETCH_INTERVAL
-        )
     }
 
     private fun fetchCoins(showBusy: Boolean = false) {
@@ -117,8 +113,32 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
         }
     }
 
+    fun onCoinSelected(coinId: String) {
+        _navigateToDetailsPage.value = Event(coinId)
+    }
+
+    fun startTimer() {
+        timer?.cancel()
+        timer = Timer()
+        timer?.scheduleAtFixedRate(
+            object : TimerTask() {
+                override fun run() {
+                    fetchCoins()
+                }
+            },
+            FETCH_INTERVAL,
+            FETCH_INTERVAL
+        )
+    }
+
+    fun stopTimer() {
+        timer?.cancel()
+        timer = null
+    }
+
     override fun onCleared() {
+        Timber.d("MainViewModel onCleared")
         super.onCleared()
-        timer.cancel()
+        timer?.cancel()
     }
 }

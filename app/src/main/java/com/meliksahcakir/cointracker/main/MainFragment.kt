@@ -13,23 +13,25 @@ import androidx.appcompat.widget.ListPopupWindow
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.meliksahcakir.androidutils.EventObserver
 import com.meliksahcakir.androidutils.afterTextChanged
 import com.meliksahcakir.androidutils.hideKeyboard
 import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.data.Coin
+import com.meliksahcakir.cointracker.data.CoinInfo
 import com.meliksahcakir.cointracker.databinding.MainFragmentBinding
 import com.meliksahcakir.cointracker.ui.CoinAdapter
 import com.meliksahcakir.cointracker.ui.CoinListener
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(), CoinListener {
 
     private var _binding: MainFragmentBinding? = null
     private val binding: MainFragmentBinding get() = _binding!!
 
-    private val viewModel: MainViewModel by sharedViewModel()
+    private val viewModel: MainViewModel by viewModel()
     private val adapter = CoinAdapter(this)
 
     private var searchWindow: ListPopupWindow? = null
@@ -50,6 +52,7 @@ class MainFragment : Fragment(), CoinListener {
         val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
 
+        viewModel.startTimer()
         viewModel.busy.observe(
             viewLifecycleOwner,
             Observer {
@@ -132,9 +135,11 @@ class MainFragment : Fragment(), CoinListener {
                     }
                 } else {
                     searchWindow?.setOnItemClickListener { adapterView, _, pos, _ ->
-                        val coinInfo = adapterView.adapter.getItem(pos)
+                        val coinInfo = adapterView.adapter.getItem(pos) as? CoinInfo
                         searchWindow?.dismiss()
-                        // NAVIGATE
+                        coinInfo?.let {
+                            viewModel.onCoinSelected(coinInfo.id)
+                        }
                     }
                     binding.root.post {
                         searchWindow?.show()
@@ -142,13 +147,19 @@ class MainFragment : Fragment(), CoinListener {
                 }
             }
         )
+        viewModel.navigateToDetailsPage.observe(viewLifecycleOwner, EventObserver {
+            val action = MainFragmentDirections.actionMainFragmentToDetailsFragment(it)
+            findNavController().navigate(action)
+        })
     }
 
     override fun onDestroyView() {
+        viewModel.stopTimer()
         super.onDestroyView()
         _binding = null
     }
 
     override fun onClicked(coin: Coin) {
+        viewModel.onCoinSelected(coin.id)
     }
 }

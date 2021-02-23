@@ -59,9 +59,9 @@ class CoinRepository(
         return result
     }
 
-    suspend fun fetchFavoriteCoins(favorites: List<String>): Result<List<Coin>> {
+    suspend fun getCoins(coinIdList: List<String>): Result<List<Coin>> {
         return try {
-            val list = apiService.getCoinsMarketData(ids = favorites.joinToString(","))
+            val list = apiService.getCoinsMarketData(ids = coinIdList.joinToString(","))
                 .map { it.mapToLocalModel() }
             Result.Success(list)
         } catch (e: Exception) {
@@ -70,22 +70,14 @@ class CoinRepository(
     }
 
     suspend fun getCoinDetailsById(id: String): Result<CoinDetails> {
-        var error = false
-        var details: CoinDetails? = null
         try {
-            details = apiService.getCoinDetails(id).mapToLocalModel()
-        } catch (e: Exception) {
-            error = true
-        }
-        if (error || details == null) {
-            details = coinDetailsDao.getCoinDetailsById(id)
-        } else {
+            val details = apiService.getCoinDetails(id).mapToLocalModel()
             coinDetailsDao.insertCoinDetails(details)
-        }
-        return if (details != null) {
-            Result.Success(details)
-        } else {
-            Result.Error(Exception("Details cannot be found"))
+            return Result.Success(details)
+        } catch (e: Exception) {
+            val details = coinDetailsDao.getCoinDetailsById(id)
+                ?: return Result.Error(Exception("Details cannot be found"))
+            return Result.Success(details)
         }
     }
 }

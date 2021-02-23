@@ -15,6 +15,14 @@
     <string name="last_price">Last Price</string>
     <string name="percentage_change_24h">24h Chg %</string>
     <string name="sort_by">Sort By</string>
+    <string name="high_24h">High 24h</string>
+    <string name="low_24h">Low 24h</string>
+    <string name="volume">Volume</string>
+    <string name="details">Details</string>
+    <string name="hashing_algorithm">Hashing Algorithm</string>
+    <string name="description">Description</string>
+    <string name="settings">Settings</string>
+    <string name="update_interval">Update Interval</string>
     <string-array name="sort_methods">
         <item>Market Cap Descending</item>
         <item>Market Cap Ascending</item>
@@ -26,5 +34,12 @@
         <item>Last Price Ascending</item>
         <item>24h Change Descending</item>
         <item>24h Change Ascending</item>
+    </string-array>
+    <string-array name="update_intervals_str">
+        <item>5 seconds</item>
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>45 seconds</item>
+        <item>60 seconds</item>
     </string-array>
 </resources>
