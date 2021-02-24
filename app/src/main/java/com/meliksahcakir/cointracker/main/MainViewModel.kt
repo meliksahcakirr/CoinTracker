@@ -8,18 +8,16 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
-import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.data.Coin
 import com.meliksahcakir.cointracker.data.CoinInfo
 import com.meliksahcakir.cointracker.data.CoinOrder
 import com.meliksahcakir.cointracker.data.CoinRepository
 import com.meliksahcakir.cointracker.utils.NoConnectivityException
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.Timer
 import java.util.TimerTask
 
-const val FETCH_INTERVAL = 1000L
+const val FETCH_INTERVAL = 5000L
 const val SEARCH_LENGTH_THRESHOLD = 3
 
 class MainViewModel(private val repository: CoinRepository, private val app: Application) :
@@ -50,7 +48,6 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
     private var timer: Timer? = null
 
     init {
-        Timber.d("MainViewModel init")
         fetchCoins(true)
     }
 
@@ -63,8 +60,6 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
             if (result is Result.Error) {
                 if (result.exception is NoConnectivityException) {
                     _warningEvent.value = Event(result.exception.message ?: "")
-                } else {
-                    _warningEvent.value = Event(app.getString(R.string.error_occurred))
                 }
             }
             if (showBusy) {
@@ -137,8 +132,7 @@ class MainViewModel(private val repository: CoinRepository, private val app: App
     }
 
     override fun onCleared() {
-        Timber.d("MainViewModel onCleared")
         super.onCleared()
-        timer?.cancel()
+        stopTimer()
     }
 }

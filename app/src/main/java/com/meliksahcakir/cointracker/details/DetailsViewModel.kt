@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
-import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.data.Coin
 import com.meliksahcakir.cointracker.data.CoinDetails
 import com.meliksahcakir.cointracker.data.CoinRepository
@@ -79,8 +78,6 @@ class DetailsViewModel(private val repository: CoinRepository, private val app: 
             if (result is Result.Error) {
                 if (result.exception is NoConnectivityException) {
                     _warningEvent.value = Event(result.exception.message ?: "")
-                } else {
-                    _warningEvent.value = Event(app.getString(R.string.error_occurred))
                 }
             } else if (result is Result.Success) {
                 _details.value = result.data

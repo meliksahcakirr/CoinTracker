@@ -41,7 +41,7 @@ val detailsViewModelModule = module {
 
 val favoriteViewModelModule = module {
     viewModel {
-        FavoriteViewModel(get())
+        FavoriteViewModel(get(), androidApplication())
     }
 }
 
