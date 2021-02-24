@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -54,6 +55,7 @@ class FavoriteFragment : Fragment(), FavoriteCoinListener {
             }
         }
 
+        viewModel.startTimer()
         viewModel.busy.observe(
             viewLifecycleOwner,
             Observer {
@@ -89,14 +91,26 @@ class FavoriteFragment : Fragment(), FavoriteCoinListener {
                 requireActivity().finish()
             }
         )
+        viewModel.navigateToDetailsPage.observe(
+            viewLifecycleOwner,
+            EventObserver {
+                val action = FavoriteFragmentDirections.actionFavoriteFragmentToDetailsFragment(it)
+                findNavController().navigate(action)
+            }
+        )
     }
 
     override fun onDestroyView() {
+        viewModel.stopTimer()
         super.onDestroyView()
         _binding = null
     }
 
     override fun onFavoriteClicked(coin: Coin) {
         viewModel.onFavoriteClicked(coin)
+    }
+
+    override fun onCoinClicked(coin: Coin) {
+        viewModel.onCoinSelected(coin.id)
     }
 }

@@ -55,9 +55,13 @@ class FavoriteCoinViewHolder(
         binding.favoriteImageView.setOnClickListener {
             listener.onFavoriteClicked(coin)
         }
+        binding.root.setOnClickListener {
+            listener.onCoinClicked(coin)
+        }
     }
 }
 
 interface FavoriteCoinListener {
     fun onFavoriteClicked(coin: Coin)
+    fun onCoinClicked(coin: Coin)
 }

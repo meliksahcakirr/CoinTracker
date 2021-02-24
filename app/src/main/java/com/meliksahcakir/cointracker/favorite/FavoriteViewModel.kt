@@ -35,11 +35,11 @@ class FavoriteViewModel(
     private val _navigateToLoginScreen = MutableLiveData<Event<Unit>>()
     val navigateToLoginScreen: LiveData<Event<Unit>> = _navigateToLoginScreen
 
+    private val _navigateToDetailsPage = MutableLiveData<Event<String>>()
+    val navigateToDetailsPage: LiveData<Event<String>> = _navigateToDetailsPage
+
     init {
-        viewModelScope.launch {
-            fetchCoins(userRemote.favorites, true)
-            startTimer()
-        }
+        fetchCoins(userRemote.favorites, true)
     }
 
     private fun fetchCoins(list: List<String>, showBusy: Boolean = false) {
@@ -75,7 +75,11 @@ class FavoriteViewModel(
         }
     }
 
-    private fun startTimer() {
+    fun onCoinSelected(coinId: String) {
+        _navigateToDetailsPage.value = Event(coinId)
+    }
+
+    fun startTimer() {
         timer?.cancel()
         timer = Timer()
         timer?.scheduleAtFixedRate(
@@ -89,7 +93,7 @@ class FavoriteViewModel(
         )
     }
 
-    private fun stopTimer() {
+    fun stopTimer() {
         timer?.cancel()
         timer = null
     }

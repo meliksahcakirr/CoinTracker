@@ -22,7 +22,7 @@
         style="@style/TitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/base_grid_size"
+        android:layout_margin="@dimen/double_grid_size"
         android:text="@string/favorite_coins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
         style="@style/SmallTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/base_grid_size"
+        android:layout_marginEnd="@dimen/double_grid_size"
         android:background="?selectableItemBackground"
         android:text="@string/sign_out"
         app:layout_constraintBottom_toBottomOf="@id/favoriteCoinsTextView"
@@ -49,7 +49,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favoriteCoinsTextView"
         tools:itemCount="15"
-        tools:listitem="@layout/favorite_coin_item" />
+        tools:listitem="@layout/favorite_coin_item"
+        android:layout_marginTop="@dimen/base_grid_size"/>
 
     <ImageView
         android:id="@+id/emptyImageView"
