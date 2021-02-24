@@ -10,7 +10,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.meliksahcakir.androidutils.EventObserver
-import com.meliksahcakir.androidutils.Result
 import com.meliksahcakir.cointracker.R
 import com.meliksahcakir.cointracker.databinding.ActivityLoginBinding
 import com.meliksahcakir.cointracker.main.MainActivity
@@ -29,14 +28,10 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.loginResult.observe(
+        viewModel.warningEvent.observe(
             this,
-            Observer {
-                if (it is Result.Error) {
-                    Toast.makeText(applicationContext, it.exception.message, Toast.LENGTH_SHORT).show()
-                } else {
-                    navigateToMainActivity()
-                }
+            EventObserver {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
         )
 

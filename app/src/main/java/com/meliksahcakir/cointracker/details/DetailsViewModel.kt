@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
 import com.meliksahcakir.cointracker.data.Coin
 import com.meliksahcakir.cointracker.data.CoinDetails
 import com.meliksahcakir.cointracker.data.CoinRepository
+import com.meliksahcakir.cointracker.data.UserRemote
 import com.meliksahcakir.cointracker.utils.NoConnectivityException
 import kotlinx.coroutines.launch
 import java.util.Timer
@@ -20,7 +20,7 @@ private const val DEFAULT_INTERVAL = 5L
 
 class DetailsViewModel(
     private val repository: CoinRepository,
-    private val firebaseAuth: FirebaseAuth
+    private val userRemote: UserRemote
 ) : ViewModel() {
 
     private val _busy = MutableLiveData<Boolean>(false)
@@ -44,12 +44,20 @@ class DetailsViewModel(
 
     private var updateIntervalInSeconds = DEFAULT_INTERVAL
 
+    init {
+        viewModelScope.launch {
+        }
+    }
+
     fun fetchInitialData(id: String) {
-        if (coinId != id) {
-            coinId = id
-            fetchDetails(id)
-            fetchCoin(id)
-            updateTimerInterval(updateIntervalInSeconds)
+        viewModelScope.launch {
+            if (coinId != id) {
+                coinId = id
+                _favorite.value = userRemote.favorites.contains(coinId)
+                fetchCoin(id)
+                fetchDetails(id)
+                updateTimerInterval(updateIntervalInSeconds)
+            }
         }
     }
 
@@ -70,7 +78,15 @@ class DetailsViewModel(
     }
 
     fun onFavoriteButtonClicked() {
-        _favorite.value = !(_favorite.value ?: false)
+        viewModelScope.launch {
+            if (userRemote.favorites.contains(coinId)) {
+                userRemote.removeFromFavoriteList(coinId)
+                _favorite.value = false
+            } else {
+                userRemote.addToFavoriteList(coinId)
+                _favorite.value = true
+            }
+        }
     }
 
     private fun fetchDetails(id: String) {

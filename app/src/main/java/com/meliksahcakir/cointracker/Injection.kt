@@ -2,12 +2,12 @@ package com.meliksahcakir.cointracker
 
 import android.content.Context
 import androidx.room.Room
-import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.cointracker.data.ApiService
 import com.meliksahcakir.cointracker.data.CoinDao
 import com.meliksahcakir.cointracker.data.CoinDatabase
 import com.meliksahcakir.cointracker.data.CoinDetailsDao
 import com.meliksahcakir.cointracker.data.CoinRepository
+import com.meliksahcakir.cointracker.data.UserRemote
 import com.meliksahcakir.cointracker.details.DetailsViewModel
 import com.meliksahcakir.cointracker.favorite.FavoriteViewModel
 import com.meliksahcakir.cointracker.login.LoginViewModel
@@ -24,13 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val splashViewModelModule = module {
     viewModel {
-        SplashViewModel(get(), FirebaseAuth.getInstance())
+        SplashViewModel(get(), UserRemote)
     }
 }
 
 val loginViewModelModule = module {
     viewModel {
-        LoginViewModel(FirebaseAuth.getInstance())
+        LoginViewModel(UserRemote)
     }
 }
 
@@ -42,13 +42,13 @@ val mainViewModelModule = module {
 
 val detailsViewModelModule = module {
     viewModel {
-        DetailsViewModel(get(), FirebaseAuth.getInstance())
+        DetailsViewModel(get(), UserRemote)
     }
 }
 
 val favoriteViewModelModule = module {
     viewModel {
-        FavoriteViewModel(get(), FirebaseAuth.getInstance())
+        FavoriteViewModel(get(), UserRemote)
     }
 }
 

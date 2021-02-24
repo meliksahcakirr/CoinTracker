@@ -6,21 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.Auth
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
+import com.meliksahcakir.cointracker.data.UserRemote
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class LoginViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
-
-    private val _loginResult = MutableLiveData<Result<FirebaseUser>>()
-    val loginResult: LiveData<Result<FirebaseUser>> = _loginResult
+class LoginViewModel(private val userRemote: UserRemote) : ViewModel() {
 
     private val _navigateToMainActivity = MutableLiveData<Event<Unit>>()
     val navigateToMainActivity: LiveData<Event<Unit>> = _navigateToMainActivity
+
+    private val _warningEvent = MutableLiveData<Event<String>>()
+    val warningEvent: LiveData<Event<String>> = _warningEvent
 
     private val _busy = MutableLiveData<Boolean>(false)
     val busy: LiveData<Boolean> = _busy
@@ -29,7 +29,12 @@ class LoginViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
         viewModelScope.launch {
             _busy.value = true
             val result = internalLogin(data)
-            _loginResult.value = result
+            if (result is Result.Success) {
+                userRemote.setup()
+                _navigateToMainActivity.value = Event(Unit)
+            } else if (result is Result.Error) {
+                _warningEvent.value = Event(result.exception.message ?: "")
+            }
             _busy.value = false
         }
     }
@@ -40,9 +45,9 @@ class LoginViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
             if (result.isSuccess) {
                 val account = result.signInAccount
                 val credential = GoogleAuthProvider.getCredential(account?.idToken, null)
-                firebaseAuth.signInWithCredential(credential).await()
+                userRemote.firebaseAuth.signInWithCredential(credential).await()
             }
-            val user = firebaseAuth.currentUser
+            val user = userRemote.firebaseAuth.currentUser
             if (user != null) {
                 Result.Success(user)
             } else {
@@ -54,9 +59,12 @@ class LoginViewModel(private val firebaseAuth: FirebaseAuth) : ViewModel() {
     }
 
     fun checkUser(): FirebaseUser? {
-        val user = firebaseAuth.currentUser
+        val user = userRemote.firebaseAuth.currentUser
         if (user != null) {
-            _navigateToMainActivity.value = Event(Unit)
+            viewModelScope.launch {
+                userRemote.setup()
+                _navigateToMainActivity.value = Event(Unit)
+            }
         }
         return user
     }
