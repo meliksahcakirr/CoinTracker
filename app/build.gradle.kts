@@ -5,6 +5,7 @@ plugins {
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-android")
+    id("com.google.gms.google-services") version Versions.GOOGLE_SERVICES
 }
 
 android {
@@ -66,6 +67,7 @@ dependencies {
     implementation(SupportLibs.ANDROIDX_ROOM_COMPILER)
     implementation(SupportLibs.COROUTINES_CORE)
     implementation(SupportLibs.COROUTINES_ANDROID)
+    implementation(SupportLibs.COROUTINES_PLAY_SERVICES)
     implementation(SupportLibs.TIMBER)
     implementation(SupportLibs.RETROFIT2)
     implementation(SupportLibs.RETROFIT2_GSON)
@@ -80,6 +82,9 @@ dependencies {
     implementation(SupportLibs.KOIN_ANDROID)
     implementation(SupportLibs.KOIN_VIEW_MODEL)
     implementation(SupportLibs.KOIN_SCOPE)
+
+    implementation(SupportLibs.FIREBASE_AUTH)
+    implementation(SupportLibs.FIREBASE_FIRESTORE)
 
     testImplementation(TestingLib.JUNIT)
 

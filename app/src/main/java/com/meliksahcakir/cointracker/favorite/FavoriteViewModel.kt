@@ -1,10 +1,10 @@
 package com.meliksahcakir.cointracker.favorite
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
 import com.meliksahcakir.cointracker.data.Coin
@@ -16,8 +16,10 @@ import java.util.TimerTask
 
 const val FETCH_INTERVAL = 5000L
 
-class FavoriteViewModel(private val repository: CoinRepository, private val app: Application) :
-    AndroidViewModel(app) {
+class FavoriteViewModel(
+    private val repository: CoinRepository,
+    private val firebaseAuth: FirebaseAuth
+) : ViewModel() {
 
     val list = mutableListOf("bitcoin", "ripple", "ethereum")
 
@@ -31,6 +33,9 @@ class FavoriteViewModel(private val repository: CoinRepository, private val app:
     val busy: LiveData<Boolean> = _busy
 
     private var timer: Timer? = null
+
+    private val _navigateToLoginScreen = MutableLiveData<Event<Unit>>()
+    val navigateToLoginScreen: LiveData<Event<Unit>> = _navigateToLoginScreen
 
     init {
         fetchCoins(list, true)
@@ -87,5 +92,10 @@ class FavoriteViewModel(private val repository: CoinRepository, private val app:
     override fun onCleared() {
         super.onCleared()
         stopTimer()
+    }
+
+    fun signOut() {
+        firebaseAuth.signOut()
+        _navigateToLoginScreen.value = Event(Unit)
     }
 }

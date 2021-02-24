@@ -1,5 +1,6 @@
 package com.meliksahcakir.cointracker.favorite
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.meliksahcakir.androidutils.EventObserver
 import com.meliksahcakir.cointracker.data.Coin
 import com.meliksahcakir.cointracker.databinding.FavoriteFragmentBinding
+import com.meliksahcakir.cointracker.login.LoginActivity
 import com.meliksahcakir.cointracker.ui.FavoriteCoinAdapter
 import com.meliksahcakir.cointracker.ui.FavoriteCoinListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,7 +44,18 @@ class FavoriteFragment : Fragment(), FavoriteCoinListener {
         val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         binding.recyclerView.addItemDecoration(dividerItemDecoration)
 
-        viewModel.busy.observe(viewLifecycleOwner,
+        binding.signOutTextView.setOnClickListener {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+            val googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+            googleSignInClient.signOut().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    viewModel.signOut()
+                }
+            }
+        }
+
+        viewModel.busy.observe(
+            viewLifecycleOwner,
             Observer {
                 binding.progressBar.isVisible = it == true
             }
@@ -64,6 +79,14 @@ class FavoriteFragment : Fragment(), FavoriteCoinListener {
                     binding.emptyGroup.isVisible = false
                     adapter.submitList(it)
                 }
+            }
+        )
+
+        viewModel.navigateToLoginScreen.observe(
+            viewLifecycleOwner,
+            Observer {
+                startActivity(Intent(requireContext(), LoginActivity::class.java))
+                requireActivity().finish()
             }
         )
     }

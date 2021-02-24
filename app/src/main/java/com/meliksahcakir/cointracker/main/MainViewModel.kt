@@ -1,9 +1,8 @@
 package com.meliksahcakir.cointracker.main
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.meliksahcakir.androidutils.Event
@@ -20,8 +19,7 @@ import java.util.TimerTask
 const val FETCH_INTERVAL = 5000L
 const val SEARCH_LENGTH_THRESHOLD = 3
 
-class MainViewModel(private val repository: CoinRepository, private val app: Application) :
-    AndroidViewModel(app) {
+class MainViewModel(private val repository: CoinRepository) : ViewModel() {
 
     private var _order = MutableLiveData<CoinOrder>(CoinOrder.MARKET_CAP_DESC)
 

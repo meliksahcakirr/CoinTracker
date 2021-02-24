@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.cointracker.data.CoinRepository
 import kotlinx.coroutines.delay
@@ -16,7 +17,10 @@ enum class SplashActivityDirections {
 
 private const val DELAY = 2500L
 
-class SplashViewModel(private val repository: CoinRepository) : ViewModel() {
+class SplashViewModel(
+    private val repository: CoinRepository,
+    private val firebaseAuth: FirebaseAuth
+) : ViewModel() {
 
     private var initialized = false
 
@@ -27,7 +31,12 @@ class SplashViewModel(private val repository: CoinRepository) : ViewModel() {
         start()
         viewModelScope.launch {
             delay(DELAY)
-            _navigateToNextScreen.postValue(Event(SplashActivityDirections.MAIN_ACTIVITY))
+            val user = firebaseAuth.currentUser
+            if (user == null) {
+                _navigateToNextScreen.postValue(Event(SplashActivityDirections.LOGIN_ACTIVITY))
+            } else {
+                _navigateToNextScreen.postValue(Event(SplashActivityDirections.MAIN_ACTIVITY))
+            }
         }
     }
 

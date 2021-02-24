@@ -1,10 +1,10 @@
 package com.meliksahcakir.cointracker.details
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.androidutils.Event
 import com.meliksahcakir.androidutils.Result
 import com.meliksahcakir.cointracker.data.Coin
@@ -18,8 +18,10 @@ import java.util.concurrent.TimeUnit
 
 private const val DEFAULT_INTERVAL = 5L
 
-class DetailsViewModel(private val repository: CoinRepository, private val app: Application) :
-    AndroidViewModel(app) {
+class DetailsViewModel(
+    private val repository: CoinRepository,
+    private val firebaseAuth: FirebaseAuth
+) : ViewModel() {
 
     private val _busy = MutableLiveData<Boolean>(false)
     val busy: LiveData<Boolean> = _busy

@@ -2,6 +2,7 @@ package com.meliksahcakir.cointracker
 
 import android.content.Context
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import com.meliksahcakir.cointracker.data.ApiService
 import com.meliksahcakir.cointracker.data.CoinDao
 import com.meliksahcakir.cointracker.data.CoinDatabase
@@ -9,12 +10,12 @@ import com.meliksahcakir.cointracker.data.CoinDetailsDao
 import com.meliksahcakir.cointracker.data.CoinRepository
 import com.meliksahcakir.cointracker.details.DetailsViewModel
 import com.meliksahcakir.cointracker.favorite.FavoriteViewModel
+import com.meliksahcakir.cointracker.login.LoginViewModel
 import com.meliksahcakir.cointracker.main.MainViewModel
 import com.meliksahcakir.cointracker.splash.SplashViewModel
 import com.meliksahcakir.cointracker.utils.NetworkConnectionInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -23,25 +24,31 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val splashViewModelModule = module {
     viewModel {
-        SplashViewModel(get())
+        SplashViewModel(get(), FirebaseAuth.getInstance())
+    }
+}
+
+val loginViewModelModule = module {
+    viewModel {
+        LoginViewModel(FirebaseAuth.getInstance())
     }
 }
 
 val mainViewModelModule = module {
     viewModel {
-        MainViewModel(get(), androidApplication())
+        MainViewModel(get())
     }
 }
 
 val detailsViewModelModule = module {
     viewModel {
-        DetailsViewModel(get(), androidApplication())
+        DetailsViewModel(get(), FirebaseAuth.getInstance())
     }
 }
 
 val favoriteViewModelModule = module {
     viewModel {
-        FavoriteViewModel(get(), androidApplication())
+        FavoriteViewModel(get(), FirebaseAuth.getInstance())
     }
 }
 
@@ -106,6 +113,7 @@ val databaseModule = module {
 
 val modules = listOf(
     splashViewModelModule,
+    loginViewModelModule,
     mainViewModelModule,
     detailsViewModelModule,
     favoriteViewModelModule,

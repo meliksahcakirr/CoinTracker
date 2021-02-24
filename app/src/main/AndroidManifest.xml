@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         tools:ignore="AllowBackup">
+        <activity android:name=".login.LoginActivity" />
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity"
-            android:windowSoftInputMode="adjustNothing"/>
+        <activity
+            android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustNothing" />
     </application>
 
 </manifest>

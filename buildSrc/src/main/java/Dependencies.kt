@@ -17,6 +17,7 @@ object Versions {
     const val NAVIGATION = "2.3.2"
     const val LIFECYCLE = "2.2.0"
     const val COROUTINE = "1.3.9"
+    const val COROUTINE_PLAY_SERVICES = "1.1.1"
     const val ROOM = "2.2.6"
     const val FRAGMENT = "1.2.5"
     const val TIMBER = "4.7.1"
@@ -24,6 +25,9 @@ object Versions {
     const val OK_HTTP = "4.0.0"
     const val GLIDE = "4.12.0"
     const val KOIN = "2.2.2"
+    const val FIREBASE_AUTH = "6.2.0"
+    const val FIRESTORE_KTX = "22.0.0"
+    const val GOOGLE_SERVICES = "4.3.4"
 }
 
 object BuildPluginsVersion {
@@ -58,6 +62,8 @@ object SupportLibs {
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.COROUTINE}"
     const val COROUTINES_ANDROID =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.COROUTINE}"
+    const val COROUTINES_PLAY_SERVICES =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${Versions.COROUTINE_PLAY_SERVICES}"
     const val TIMBER = "com.jakewharton.timber:timber:${Versions.TIMBER}"
     const val RETROFIT2 = "com.squareup.retrofit2:retrofit:${Versions.RETROFIT}"
     const val RETROFIT2_GSON = "com.squareup.retrofit2:converter-gson:${Versions.RETROFIT}"
@@ -67,6 +73,9 @@ object SupportLibs {
     const val KOIN_ANDROID = "org.koin:koin-android:${Versions.KOIN}"
     const val KOIN_VIEW_MODEL = "org.koin:koin-androidx-viewmodel:${Versions.KOIN}"
     const val KOIN_SCOPE = "org.koin:koin-androidx-scope:${Versions.KOIN}"
+    const val FIREBASE_AUTH = "com.firebaseui:firebase-ui-auth:${Versions.FIREBASE_AUTH}"
+    const val FIREBASE_FIRESTORE =
+        "com.google.firebase:firebase-firestore-ktx:${Versions.FIRESTORE_KTX}"
 }
 
 object TestingLib {

@@ -7,7 +7,6 @@
     <string name="search_coins">Search coins</string>
     <string name="sort">Sort</string>
     <string name="coin_logo">coin_logo</string>
-    <string name="error_occurred">Error Occurred</string>
     <string name="no_internet">Internet connection is not available. </string>
     <string name="no_coins_available">There are no coins available.</string>
     <string name="vs_usd">/ USD</string>
@@ -23,6 +22,8 @@
     <string name="description">Description</string>
     <string name="settings">Settings</string>
     <string name="update_interval">Update Interval</string>
+    <string name="favorite_coins">Favorite Coins</string>
+    <string name="sign_out">Sign Out</string>
     <string-array name="sort_methods">
         <item>Market Cap Descending</item>
         <item>Market Cap Ascending</item>
