@@ -18,6 +18,7 @@ import java.util.TimerTask
 
 const val FETCH_INTERVAL = 5000L
 const val SEARCH_LENGTH_THRESHOLD = 3
+const val SEARCH_HEIGHT_RATIO = 0.5f
 
 class MainViewModel(private val repository: CoinRepository) : ViewModel() {
 

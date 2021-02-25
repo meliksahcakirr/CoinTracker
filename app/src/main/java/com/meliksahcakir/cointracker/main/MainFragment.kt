@@ -1,5 +1,7 @@
 package com.meliksahcakir.cointracker.main
 
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -108,12 +110,17 @@ class MainFragment : Fragment(), CoinListener {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun setupSearch() {
         searchWindow = ListPopupWindow(requireActivity(), null, R.attr.listPopupWindowStyle)
         searchWindow?.anchorView = binding.searchCardView
+        searchWindow?.setForceIgnoreOutsideTouch(true)
+        searchWindow?.height =
+            (Resources.getSystem().displayMetrics.heightPixels * SEARCH_HEIGHT_RATIO).toInt()
         binding.searchEditText.afterTextChanged {
             viewModel.search(it)
         }
+
         binding.searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.search(binding.searchEditText.text.toString())
@@ -163,6 +170,10 @@ class MainFragment : Fragment(), CoinListener {
     }
 
     override fun onClicked(coin: Coin) {
-        viewModel.onCoinSelected(coin.id)
+        if (searchWindow?.isShowing == true) {
+            searchWindow?.dismiss()
+        } else {
+            viewModel.onCoinSelected(coin.id)
+        }
     }
 }
